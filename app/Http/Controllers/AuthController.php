@@ -49,7 +49,7 @@ class AuthController extends Controller
             'gender' => ['required'],
             'birth_date' => ['required']
         ]);
-
+        $getRequest['role_id'] = 1;
         if ($request->file('image')) {
             $imgFile = $request->file('image');
             $getRequest['image'] =  $imgFile->store('image/', 'public');

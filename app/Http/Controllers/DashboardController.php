@@ -10,7 +10,7 @@ class DashboardController extends Controller
     // TODO: show users list
     public function index()
     {
-        return view('dashboard.index', ['users' => User::all()]);
+        return view('dashboard.index', ['users' => User::query()->orderBy('role_id')->get()]);
     }
 
     // TODO: make user to admin
