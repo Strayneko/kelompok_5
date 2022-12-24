@@ -2,7 +2,7 @@
  @section('title', 'Tambah Aspirasi')
  @section('content')
      <h1 class="my-4">Form aspirasi</h1>
-     <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('aspiration.store') }}">
+     <form method="post" class="col-md-4" enctype="multipart/form-data">
          @csrf
 
          <div class="mb-3">
@@ -24,5 +24,3 @@
          <button type="submit" class="btn btn-primary mb-4">Submit</button>
      </form>
  @endsection
-
-@endsection
