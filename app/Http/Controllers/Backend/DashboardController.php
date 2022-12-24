@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Aspiration;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -76,6 +77,31 @@ class DashboardController extends Controller
             'status' => true,
             'message' => "User mendapatkan hak akses Admin",
             'data' => $user
+        ]);
+    }
+
+    public function changeStatus($id)
+    {
+        $status = Aspiration::find($id);
+        if (!$status) {
+            return response()->json([
+                'status_code' => 404,
+                'status' => false,
+                'message' => "ID aspiration tidak ditemukan",
+                'data' => []
+            ]);
+        }
+
+        $payload = [
+            'status' => 1
+        ];
+
+        $status->update($payload);
+
+        return response()->json([
+            'status_code' => 200,
+            'status' => true,
+            'message' => "status sudah dibaca"
         ]);
     }
 }
