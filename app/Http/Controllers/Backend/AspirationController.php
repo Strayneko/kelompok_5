@@ -133,7 +133,7 @@ class AspirationController extends Controller
     // TODO: show detail aspiration by the given id
     public function show($id)
     {
-        $aspirasi = Aspiration::find($id);
+        $aspirasi = Aspiration::with('user')->find($id);
         if (!$aspirasi) {
             return response()->json([
                 'status_code' => 404,

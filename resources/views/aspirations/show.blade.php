@@ -56,7 +56,7 @@
                      // then hide the button
                      if (res.data.status == 1) $("#changeStatus").hide()
                      //  set form value if request status true
-                     $('#sender_name').val(res.data.user_id)
+                     $('#sender_name').val(res.data.user.name)
                      $('#title').val(res.data.title)
                      $("#changeStatus").attr('onclick', `statusChange(${res.data.id})`)
                      $("#content").text(res.data.content)
