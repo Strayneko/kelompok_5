@@ -13,8 +13,7 @@ use App\Models\User;
 class AspirationController extends Controller
 {
     //TODO: show store aspiration
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $payload = [
             'user_id' => $request->input('user_id'),
             'title' => $request->input("title"),
@@ -31,6 +30,16 @@ class AspirationController extends Controller
             'message' => "Data Berhasil Dibuat!",
             'data' => $aspirasi
         ]);
+    }
+
+    // TODO: show all aspirations data by userId
+    public function getAspiById($id){
+        $getData = Aspiration::where('user_id', $id)->get();
+        return response()->json([
+            'status' => true,
+            'code' => 200,
+            'data' => $getData
+        ], 200);
     }
 
     // TODO: show all aspirations data

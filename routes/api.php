@@ -42,6 +42,7 @@ Route::prefix('aspiration')
     ->controller(AspirationController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/dashboard/{id}', 'getAspiById')->name('aspi.id');
         Route::get('/create', 'create')->name('create');
         Route::get('/{id}', 'show')->name('show');
         Route::get('/{id}/edit', 'edit')->name('edit');
