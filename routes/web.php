@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\AuthViewController;
 use App\Http\Controllers\AspirationController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -37,15 +38,13 @@ Route::name('aspiration.')
 // auth route grouping
 Route::name('auth.')
     ->prefix('auth')
-    ->controller(AuthController::class)
-    ->group(function () {
-        Route::get('/', 'login')->name('login');
-        Route::get('/logout', 'logout')->name('logout');
-        Route::get('/register', 'register')->name('register');
-        // Route::post('/', 'authenticate')->name('authenticate');
+    ->group(function(){
+        Route::get('/', [AuthViewController::class, 'login'])->name('login');
+        // Route::get('/logout', 'logout')->name('logout');
+        Route::get('/register', [AuthViewController::class, 'register'])->name('register');
+        Route::post('/', [AuthController::class, 'authenticate'])->name('authenticate');
         // Route::post('/register', 'registration')->name('registration');
     });
-
 
 // dashboard
 Route::prefix('dashboard')

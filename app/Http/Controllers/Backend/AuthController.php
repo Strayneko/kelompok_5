@@ -21,20 +21,16 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($validate)) {
+        if(Auth::attempt($validate)){
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
-        return response()->json([
-            'status' => true,
-            'message' => 'success',
-        ]);
+        return redirect()->back()->withErrors(['message' => 'Login errors']);
     }
 
     // TODO: register user 
     public function registration(Request $request)
     {
-
         $getRequest = $request->all();
         $validate = Validator::make($getRequest, [
             "email" => ['required', 'email'],
