@@ -1,10 +1,6 @@
 <?php
-<<<<<<< HEAD
-namespace App\Http\Controllers;
-=======
 
 namespace App\Http\Controllers\Backend;
->>>>>>> 875910af8278366a2a8ebec6debf6f69a95ac508
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
