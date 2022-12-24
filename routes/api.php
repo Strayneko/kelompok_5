@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/register/a', [AuthController::class, 'registration']);
+
 Route::prefix('auth')
     ->controller(AuthController::class)
     ->group(function () {
@@ -32,7 +32,7 @@ Route::prefix('dashboard')
     ->controller(DashboardController::class)
     ->group(function () {
         Route::get('/', 'index');
-    });
+});
 
 // aspiration route grouping
 Route::prefix('aspiration')
@@ -45,4 +45,5 @@ Route::prefix('aspiration')
         Route::post('/{id}/update', 'update')->name('update');
         Route::post('/create', 'store')->name('store');
         Route::delete('/{id}/delete', 'destroy')->name('destroy');
+        Route::post('/{id}/makeAdmin', 'makeAdmin')->name('makeAdmin');
     });

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Aspiration;
+use App\Models\Role;
+use App\Models\User;
 
 class AspirationController extends Controller
 {
@@ -52,8 +54,7 @@ class AspirationController extends Controller
     }
 
     // TODO: update aspiration data by the given id
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $aspirasi = Aspiration::find($id);
         if (!$aspirasi) {
             return response()->json([
@@ -127,5 +128,31 @@ class AspirationController extends Controller
             'message' => "Data Berhasil Dihapus",
             'data' => []
         ]);
+    }
+
+    public function makeAdmin($id)
+    {
+        $user = User::find($id);
+        if(!$user) {
+            return response()->json([
+                'status_code' => 404,
+                'status' => false,
+                'message' => "ID User tidak ditemukan",
+                'data' => []
+            ]);
+        }
+
+        $payload = [
+            'role_id' => 2
+        ];
+        
+        $user->update($payload);
+
+       return response()->json([
+            'status_code' => 200,
+            'status' => true,
+            'message' => "User mendapatkan hak akses Admin",
+            'data' => $user
+       ]);
     }
 }

@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('title', 255);
             $table->text('content');
             $table->text('image');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

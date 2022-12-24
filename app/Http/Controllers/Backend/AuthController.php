@@ -21,18 +21,17 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($validate)) {
+        if(Auth::attempt($validate)){
             $request->session()->regenerate();
             session()->put('logged_in', Auth::user()->id);
             return redirect()->intended('/');
         }
-        return redirect()->route('auth.login');
+        return redirect()->back()->withErrors(['message' => 'Login errors']);
     }
 
     // TODO: register user 
     public function registration(Request $request)
     {
-
         $getRequest = $request->all();
         $validate = Validator::make($getRequest, [
             "email" => 'required|email',
