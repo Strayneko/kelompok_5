@@ -2,8 +2,8 @@
 
 @section('title', 'Registrasi User')
 @section('content')
-    <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('auth.register') }}">
-      @csrf
+    <form method="post" id="register_form" class="col-md-4" enctype="multipart/form-data" action="{{ route('auth.register') }}">
+        @csrf
         <h1 class="my-4">Registrasi User</h1>
         <div class="mb-3">
             <label for="name" class="form-label">Nama</label>
@@ -38,4 +38,30 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            $("#register_form").on('submit', (e) => {
+                e.preventDefault();
+                const email = $('#email').val()
+                const password = $("#password").val()
+                const birth_date = $("#birth_date").val()
+                const gender = $('#gender').val()
+                const image = $('#image').prop('files')[0]
+                const fd = new FormData();
+                fd.append('email', email);
+                fd.append('password', password);
+                fd.append('birth_date', birth_date);
+                fd.append('image', image);
+                fetch('http://127.0.0.1:8000/api/auth/register', {
+                        method: 'POST',
+                        body: fd
+                    }).then(res => res.json())
+                    .then(res => {
+                        console.log(res)
+                    }).catch(err => console.log(err));
+            })
+
+        })
+    </script>
 @endsection

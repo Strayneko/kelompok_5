@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -31,7 +31,8 @@ class AuthController extends Controller
     }
 
     // TODO: register user 
-    public function registration(Request $request){
+    public function registration(Request $request)
+    {
         $getRequest = $request->all();
         $request->validate([
             "email" => ['required', 'email'],
@@ -51,14 +52,16 @@ class AuthController extends Controller
             $getRequest['image'] = 'default.jpg';
         }
 
-        User::create($getRequest);
+        $user =  User::create($getRequest);
         return response()->json([
+            'status_code' => 200,
             'status' => true,
-            'data' => $getRequest,
+            'data' => $user,
         ], 200);
     }
 
-    public function logout(){
+    public function logout()
+    {
         session()->forget('logged_in');
         return response()->json([
             'message' => 'logged out'
