@@ -27,7 +27,6 @@ class AspirationController extends Controller
     public function index()
     {
         $aspirasi = Aspiration::query()->get();
-
         return view('aspirations.index', compact('aspirasi'));
     }
 
