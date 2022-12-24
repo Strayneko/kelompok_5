@@ -18,25 +18,25 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('http://127.0.0.1:8000/api/aspiration').then(res => res.json()).then(res => {
-                let html = ``
-                let i = 1;
-                for (let aspiration of res.data) {
-                    html += `<tr>
+            fetch('http://127.0.0.1:8000/api/aspiration').then(res => res.json())
+                .then(res => {
+                    let html = ``
+                    let i = 1;
+                    for (let aspiration of res.data) {
+                        html += `<tr>
                     <td>${i++}</td>
                     <td>${aspiration.title}</td>
-                    <td>${aspiration.status == 0 ? 'Belum dibaca' : 'Sudah dibaca'}</td>
+                    <td>${aspiration.status == 0 ? '<span class="text-danger">Belum dibaca</span>' : '<span class="text-success">Sudah dibaca</span>'}</td>
                     <td>
                         <a href="http://127.0.0.1:8000/aspiration/${aspiration.id}"
                             class="badge text-decoration-none text-bg-info">Detail</a>
-                        <a href="" class="badge text-decoration-none text-bg-success text-white">Update</a>
                         <a href="" class="badge text-decoration-none text-bg-danger text-white">Hapus</a>
                     </td>
                 </tr>`
-                }
+                    }
 
-                $('#aspirations').html(html)
-            });
+                    $('#aspirations').html(html)
+                });
 
         })
     </script>
