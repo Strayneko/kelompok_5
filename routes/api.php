@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AspirationController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Http\Request;
@@ -21,10 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('auth')->controller(AuthController::class)->group(function(){
-    Route::post('/register', 'registration');
-    Route::post('/login', 'authenticate');
-});
+Route::prefix('auth')
+    ->controller(AuthController::class)
+    ->group(function () {
+        Route::post('/register', 'registration');
+        Route::post('/login', 'authenticate');
+    });
 Route::prefix('dashboard')
     ->controller(DashboardController::class)
     ->group(function () {

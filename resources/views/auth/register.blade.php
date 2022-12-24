@@ -47,19 +47,17 @@
                 const password = $("#password").val()
                 const birth_date = $("#birth_date").val()
                 const gender = $('#gender').val()
-                const image = $('#image').prop('files')[0]
+                const image = document.querySelector('#image').files[0]
                 const fd = new FormData();
                 fd.append('email', email);
                 fd.append('password', password);
                 fd.append('birth_date', birth_date);
                 fd.append('image', image);
                 fetch('http://127.0.0.1:8000/api/auth/register', {
-                        method: 'POST',
-                        body: fd
-                    }).then(res => res.json())
-                    .then(res => {
-                        console.log(res)
-                    }).catch(err => console.log(err));
+                    method: 'POST',
+                    body: fd
+                }).then(res => console.log(res.text()))
+
             })
 
         })
