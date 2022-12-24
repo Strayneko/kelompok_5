@@ -23,7 +23,11 @@ class AuthController extends Controller
         if(Auth::attempt($validate->validated())){
             $request->session()->regenerate();
             session()->put('logged_in', Auth::user()->id);
-            return redirect()->intended('/aspiration/create');
+            if(Auth::user()->role_id == 1){
+                return redirect()->intended('/aspiration/create');
+            } else{
+                return redirect()->intended('/aspiration');
+            }
         }
         return redirect()->back()->withErrors(['message' => 'Login errors']);
     }
