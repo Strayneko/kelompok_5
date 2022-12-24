@@ -14,13 +14,12 @@ class AspirationController extends Controller
 
         $payload = [
             'title' => $request->input("title"),
-            'content_response' => $request->input("content_response"),
+            'content' => $request->input("content"),
             'file' => $request->file->store("aspirations", "public")
-        ]; 
+        ];
 
         $aspirasi = Aspiration::query()->create($payload);
-        return view('aspirations.index', compact('aspirasi'));
-
+        return view('aspirations.create', compact('aspirasi'));
     }
 
     // TODO: show all aspirations data
@@ -46,11 +45,11 @@ class AspirationController extends Controller
         $aspirasi->status = $request->input('status');
 
         // cek input image
-        if($request->file("image")) {
+        if ($request->file("image")) {
             $file = $request->file("image");
             $filename = $file->hashName();
             $file->move("aspirations", $filename);
-            $path = "/aspirations/".$filename;
+            $path = "/aspirations/" . $filename;
 
             $aspirasi->file = $path;
         }
