@@ -42,7 +42,7 @@ Route::name('auth.')
     ->group(function(){
         Route::get('/', [AuthViewController::class, 'login'])->name('login')->middleware('withAuth');
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('noAuth');
-        Route::get('/register', [AuthViewController::class, 'register'])->name('register');
+        Route::get('/register', [AuthViewController::class, 'register'])->name('register')->middleware('withAuth');
         Route::post('/', [AuthController::class, 'authenticate'])->name('authenticate');
         // Route::post('/register', 'registration')->name('registration');
     });
