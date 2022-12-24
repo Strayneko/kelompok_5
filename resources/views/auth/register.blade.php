@@ -3,8 +3,8 @@
 @section('title', 'login')
 @section('content')
     <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('auth.register') }}">
+      @csrf
         <h1 class="my-4">Registrasi User</h1>
-
         <div class="mb-3">
             <label for="name" class="form-label">Nama</label>
             <input type="text" class="form-control" name="name" id="name" required autofocus>
