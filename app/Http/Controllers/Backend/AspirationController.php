@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\User;
 
-class AspirationController extends Controller{
+class AspirationController extends Controller
+{
     //TODO: show store aspiration
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $payload = [
             'user_id' => $request->input('user_id'),
             'title' => $request->input("title"),
@@ -34,7 +36,7 @@ class AspirationController extends Controller{
     // TODO: show all aspirations data
     public function index()
     {
-        $aspirasi = Aspiration::query()->get();
+        $aspirasi = Aspiration::latest()->get();
         if (!$aspirasi) {
             return response()->json([
                 'status_code' => 404,
