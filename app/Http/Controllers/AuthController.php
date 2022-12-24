@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller{
+class AuthController extends Controller
+{
 
     // TODO: show login form
-    public function login(){
+    public function login()
+    {
         return view('auth.login');
     }
 
@@ -26,11 +28,12 @@ class AuthController extends Controller{
             $request->session()->regenerate();
             return redirect()->route('home')->withErrors(['message' => 'login gagal']);
         }
-        return redirect()->route('auth.login')->withErrors(['message' => 'login gagal']);
+        return redirect()->route('auth.login');
     }
 
     // TODO: show registration form
-    public function register(){
+    public function register()
+    {
         return view('auth.register');
     }
 
@@ -58,7 +61,8 @@ class AuthController extends Controller{
         return redirect()->route('auth.login')->with('message', 'Register Success');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         session()->flush();
         return redirect()->route('auth.login')->with('message', 'logged out');
