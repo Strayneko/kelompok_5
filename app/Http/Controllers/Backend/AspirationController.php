@@ -13,9 +13,11 @@ class AspirationController extends Controller
     {
 
         $payload = [
+            'user_id' => $request->input('user_id'),
             'title' => $request->input("title"),
             'content' => $request->input("content"),
-            'image' => $request->image->store("aspirations", "public")
+            'image' => $request->image->store("aspirations", "public"),
+            'status' => 0
         ];
 
         $aspirasi = Aspiration::query()->create($payload);
@@ -23,7 +25,7 @@ class AspirationController extends Controller
         return response()->json([
             'status_code' => 201,
             'status' => true,
-            'message' => "Data Berhasil Didapatkan",
+            'message' => "Data Berhasil Dibuat!",
             'data' => $aspirasi
         ]);
     }
