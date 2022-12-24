@@ -24,7 +24,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"
-                                href="{{ route('aspiration.create') }}">Daftar aspirasi</a>
+                                href="{{ route('aspiration.getAspiByid') }}">Daftar aspirasi</a>
                         </li>
                     @endif
                     <li class="nav-item">
