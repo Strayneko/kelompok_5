@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AspirationController;
+use App\Http\Controllers\Backend\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('auth')->controller(AuthController::class)->group(function(){
+    Route::post('/register', 'registration');
+    Route::post('/login', 'authenticate');
 });

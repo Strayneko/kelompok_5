@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
 
     // TODO: show login form
-    
+
     // TODO: authenticate user
     public function authenticate(Request $request)
     {
@@ -27,15 +27,8 @@ class AuthController extends Controller
         return redirect()->route('auth.login');
     }
 
-    // TODO: show registration form
-    public function register()
-    {
-        return view('auth.register');
-    }
-
     // TODO: register user 
-    public function registration(Request $request)
-    {
+    public function registration(Request $request){
         $getRequest = $request->all();
         $request->validate([
             "email" => ['required', 'email'],
@@ -45,10 +38,12 @@ class AuthController extends Controller
             'gender' => ['required'],
             'birth_date' => ['required']
         ]);
+
         $getRequest['role_id'] = 1;
         if ($request->file('image')) {
             $imgFile = $request->file('image');
-            $getRequest['image'] =  $imgFile->store('image/', 'public');
+            // $path = ;
+            $getRequest['image'] =  $request->getSchemeAndHttpHost() . "/storage/" . $imgFile->store('image/', 'public');
         } else {
             $getRequest['image'] = 'default.jpg';
         }
@@ -57,13 +52,13 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'data' => $getRequest,
-        ]);
+        ], 200);
     }
 
-    public function logout()
-    {
-        Auth::logout();
-        session()->flush();
-        return redirect()->route('auth.login')->with('message', 'logged out');
+    public function logout(){
+        session()->forget('logged_in');
+        return response()->json([
+            'message' => 'logged out'
+        ], 200);
     }
 }

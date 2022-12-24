@@ -42,6 +42,6 @@ Route::name('auth.')
         Route::get('/', 'login')->name('login');
         Route::get('/logout', 'logout')->name('logout');
         Route::get('/register', 'register')->name('register');
-        Route::post('/', 'authenticate')->name('authenticate');
-        Route::post('/register', 'registration')->name('registration');
+        // Route::post('/', 'authenticate')->name('authenticate');
+        // Route::post('/register', 'registration')->name('registration');
     });
