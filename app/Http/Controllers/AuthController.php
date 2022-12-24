@@ -26,6 +26,8 @@ class AuthController extends Controller
 
         if (Auth::attempt($validate)) {
             $request->session()->regenerate();
+            $request->session()->put('logged_in', true);
+            $request->session()->put('user', Auth::user());
             return redirect()->intended('/');
         }
         return redirect()->route('auth.login');
