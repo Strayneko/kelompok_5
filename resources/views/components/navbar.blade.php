@@ -29,7 +29,7 @@
                     <a class="nav-link active" aria-current="page" href="{{ route('auth.login') }}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('auth.login') }}">Register</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('auth.register') }}">Register</a>
                 </li>
                 @endif
             </div>
