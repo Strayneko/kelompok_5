@@ -26,7 +26,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($validate)) {
             $request->session()->regenerate();
-            return redirect()->route('home')->withErrors(['message' => 'login gagal']);
+            return redirect()->intended('/');
         }
         return redirect()->route('auth.login');
     }
