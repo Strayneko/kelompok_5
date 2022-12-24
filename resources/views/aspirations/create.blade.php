@@ -2,7 +2,7 @@
  @section('title', 'Tambah Aspirasi')
  @section('content')
      <h1 class="my-4">Form aspirasi</h1>
-     <form method="post" class="col-md-4" enctype="multipart/form-data">
+     <form method="post" class="col-md-4" enctype="multipart/form-data" id="aspiration_form">
          @csrf
 
          <div class="mb-3">
@@ -23,5 +23,32 @@
 
          <button type="submit" class="btn btn-primary mb-4">Submit</button>
      </form>
+     <script>
+         document.addEventListener('DOMContentLoaded', () => {
+         $("#aspiration_form").on('submit', (e) => {
+             e.preventDefault();
+             const title = $('#title').val();
+             const content = $('#content').text()
+             const image = $("#image").prop('files')[0]
+             const fd = new FormData();
+             fd.append('title', title);
+             fd.append('image', image);
+             fd.append('content', content);
+             fetch('http://127.0.0.1:8000/api/aspiration/create', {
+                 method: 'POST',
+                 body: fd
+             }).then(res => res.json()).then(res => {
+                 if (!res.status) {
+                     alert(res.message);
+                     return;
+                 }
+                 alert(res.message)
+                 location.href = "http://127.0.0.1:8000/aspiration/create"
+             })
 
-@endsection
+         })
+
+         })
+         })
+     </script>
+ @endsection
