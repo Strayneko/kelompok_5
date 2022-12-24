@@ -1,8 +1,8 @@
-@extends('templates')
+@extends('templates.base')
 @section('title', 'Daftar Aspirasi')
 
 @section('content')
-
+    <h1 class="my-4">Daftar Aspirasi</h1>
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
@@ -13,16 +13,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Contoh Judul</td>
-                <td>Belum Dibaca</td>
-                <td>
-                    <a href="{{ route('aspiration.show', ['id' => 1]) }}" class="badge text-bg-info">Detail</a>
-                    <a href="" class="badge text-bg-success text-white">Update</a>
-                    <a href="" class="badge text-bg-danger text-white">Hapus</a>
-                </td>
-            </tr>
+            @foreach ($aspirasi as $aspiration)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $aspiration->title }}</td>
+                    <td>{{ $aspiration->status }}</td>
+                    <td>
+                        <a href="{{ route('aspiration.show', ['id' => 1]) }}"
+                            class="badge text-decoration-none text-bg-info">Detail</a>
+                        <a href="" class="badge text-decoration-none text-bg-success text-white">Update</a>
+                        <a href="" class="badge text-decoration-none text-bg-danger text-white">Hapus</a>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 
