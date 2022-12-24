@@ -2,7 +2,7 @@
 
 @section('title', 'Login User')
 @section('content')
-    <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('auth.authenticate') }}">
+    <form method="post" class="col-md-4" action="{{ route('auth.authenticate') }}">
       @csrf
       @if(session()->has('message'))
         <p>{{ session()->get('message') }}</p>

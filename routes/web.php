@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('aspiration.create');
+    return view('aspirations.index');
 })->name('home');
 
 // aspiration route grouping
