@@ -21,7 +21,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('auth.login') }}">Login</a>
                 </li>
-
                 @endif
             </div>
 
