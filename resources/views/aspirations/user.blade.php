@@ -2,6 +2,7 @@
 @section('title', 'Daftar Aspirasi')
 
 @section('content')
+    <h1 class="my-4">Daftar Apirasiku</h1>
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
