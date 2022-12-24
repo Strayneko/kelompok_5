@@ -11,6 +11,11 @@
          </div>
 
          <div class="mb-3">
+             <label for="date" class="form-label">Tanggal</label>
+             <input type="text" class="form-control" id="date" disabled required autofocus>
+         </div>
+
+         <div class="mb-3">
              <label for="title" class="form-label">Judul</label>
              <input type="text" class="form-control" name="title" id="title" disabled required autofocus>
          </div>
@@ -62,6 +67,7 @@
                      if (res.data.status == 1) $("#changeStatus").hide()
                      //  set form value if request status true
                      $('#sender_name').val(res.data.user.name)
+                     $('#date').val(new Date(res.data.created_at).toLocaleString())
                      $('#title').val(res.data.title)
                      $("#changeStatus").attr('onclick', `statusChange(${res.data.id})`)
                      $("#content").text(res.data.content)
