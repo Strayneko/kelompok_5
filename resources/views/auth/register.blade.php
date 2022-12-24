@@ -1,8 +1,8 @@
 @extends('templates.base')
 
-@section('title', 'login')
+@section('title', 'Registrasi User')
 @section('content')
-    <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('auth.register') }}">
+    <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('auth.registration') }}">
         <h1 class="my-4">Registrasi User</h1>
 
         <div class="mb-3">
