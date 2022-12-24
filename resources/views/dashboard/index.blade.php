@@ -33,6 +33,7 @@
                             alert(res.message)
                             return;
                         }
+                        // show alert message and redirect
                         alert(res.message);
                         location.href = "http://127.0.0.1:8000/dashboard"
                     }
@@ -55,6 +56,7 @@
                             alert(res.message)
                             return;
                         }
+                        // show alert message and redirect
                         alert(res.message);
                         location.href = "http://127.0.0.1:8000/dashboard"
                     }
@@ -64,13 +66,14 @@
         document.addEventListener('DOMContentLoaded', () => {
 
 
-
+            // fetch all user list
             fetch('http://127.0.0.1:8000/api/dashboard')
                 .then(res => res.json())
                 .then(res => {
                     let html = ``
                     let i = 1;
                     for (let user of res.data) {
+                        // append html every loop
                         html += `<tr>
                     <td>${i++}</td>
                     <td>${user.email}</td>
@@ -84,7 +87,7 @@
                     </td>
                 </tr>`
                     }
-
+                    // set user_list inner html
                     $('#user_list').html(html)
                 });
         });

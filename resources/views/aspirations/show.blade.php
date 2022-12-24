@@ -26,10 +26,21 @@
          </div>
 
          <button type="submit" class="btn btn-primary mb-4">Submit</button>
+         <button type="button" id="changeStatus" onclick="" class="btn btn-success mb-4">Tandai telah dibaca</button>
          <a href="{{ route('aspiration.index') }}" class="btn btn-warning mb-4">Kembali</a>
      </form>
 
      <script>
+         function statusChange(id) {
+             // change status by the given
+             fetch(`http://127.0.0.1:8000/api/aspiration/${id}/changeStatus`, {
+                     method: 'POST'
+                 }).then(res => res.json())
+                 .then(res => {
+                     // get response messagee
+                     alert(res.message)
+                 })
+         }
          document.addEventListener('DOMContentLoaded', () => {
              let id = location.href.split('/')
              id = id[id.length - 1]
@@ -41,9 +52,13 @@
                          alert(res.message)
                          return;
                      }
+                     //  check if current aspiration is readed by admin
+                     // then hide the button
+                     if (res.data.status == 1) $("#changeStatus").hide()
                      //  set form value if request status true
                      $('#sender_name').val(res.data.user_id)
                      $('#title').val(res.data.title)
+                     $("#changeStatus").attr('onclick', `statusChange(${res.data.id})`)
                      $("#content").text(res.data.content)
                      $("#image").attr('src', res.data.image)
                  });

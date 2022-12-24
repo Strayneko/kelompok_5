@@ -65,6 +65,12 @@ class DashboardController extends Controller
                 'data' => []
             ]);
         }
+        // return error response message
+        if ($user->role_id == 2) return response()->json([
+            'status_code' => 400,
+            'status' => false,
+            'message' => "User sudah menjadi admin",
+        ]);
 
         $payload = [
             'role_id' => 2
@@ -77,31 +83,6 @@ class DashboardController extends Controller
             'status' => true,
             'message' => "User mendapatkan hak akses Admin",
             'data' => $user
-        ]);
-    }
-
-    public function changeStatus($id)
-    {
-        $status = Aspiration::find($id);
-        if (!$status) {
-            return response()->json([
-                'status_code' => 404,
-                'status' => false,
-                'message' => "ID aspiration tidak ditemukan",
-                'data' => []
-            ]);
-        }
-
-        $payload = [
-            'status' => 1
-        ];
-
-        $status->update($payload);
-
-        return response()->json([
-            'status_code' => 200,
-            'status' => true,
-            'message' => "status sudah dibaca"
         ]);
     }
 }

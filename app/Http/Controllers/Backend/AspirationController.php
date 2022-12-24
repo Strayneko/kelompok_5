@@ -9,6 +9,7 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class AspirationController extends Controller
 {
@@ -20,6 +21,18 @@ class AspirationController extends Controller
             'content' => $request->input("content"),
             'image' => $request->getSchemeAndHttpHost() . '/storage/' .  $request->image->store("aspirations", "public"),
             'status' => 0
+        ];
+
+        $validate = Validator::make($payload, [
+            "title" => 'required',
+            "content" => 'required',
+            "image" => 'required',
+            'image' => 'required'
+        ]);
+        if ($validate->fails()) return [
+            'status_code' => 400,
+            'status' => false,
+            'message' => $validate->messages()->all()
         ];
 
         $aspirasi = Aspiration::query()->create($payload);
@@ -90,6 +103,16 @@ class AspirationController extends Controller
             $aspirasi->file = $path;
         }
 
+
+        $validate = Validator::make($aspirasi);
+        if ($validate->fails()) return [
+            'status_code' => 400,
+            'status' => false,
+            'message' => $validate->messages()->all()
+        ];
+    
+        
+
         $aspirasi->update();
 
         return response()->json([
@@ -111,6 +134,14 @@ class AspirationController extends Controller
                 'data' => []
             ]);
         }
+
+
+        $validate = Validator::make($aspirasi);
+        if ($validate->fails()) return [
+            'status_code' => 400,
+            'status' => false,
+            'message' => $validate->messages()->all()
+        ];
 
         return response()->json([
             'status_code' => 200,
@@ -134,6 +165,14 @@ class AspirationController extends Controller
         }
         $imageName = Str::of($aspirasi->image)->remove($request->getSchemeAndHttpHost() . '/storage/');
         Storage::disk('public')->delete($imageName);
+
+
+        $validate = Validator::make($aspirasi);
+        if ($validate->fails()) return [
+            'status_code' => 400,
+            'status' => false,
+            'message' => $validate->messages()->all()
+        ];
         $aspirasi->delete();
 
         return response()->json([
@@ -141,6 +180,39 @@ class AspirationController extends Controller
             'status' => true,
             'message' => "Data Berhasil Dihapus",
             'data' => []
+        ]);
+    }
+
+    public function changeStatus($id)
+    {
+        $status = Aspiration::find($id);
+        if (!$status) {
+            return response()->json([
+                'status_code' => 404,
+                'status' => false,
+                'message' => "ID aspiration tidak ditemukan",
+                'data' => []
+            ]);
+        }
+
+
+        $validate = Validator::make($status);
+        if ($validate->fails()) return [
+            'status_code' => 400,
+            'status' => false,
+            'message' => $validate->messages()->all()
+        ];
+
+        $payload = [
+            'status' => 1
+        ];
+
+        $status->update($payload);
+
+        return response()->json([
+            'status_code' => 200,
+            'status' => true,
+            'message' => "status sudah dibaca"
         ]);
     }
 }
