@@ -134,4 +134,29 @@ class AspirationController extends Controller
             'data' => []
         ]);
     }
+
+    public function changeStatus($id)
+    {
+        $status = Aspiration::find($id);
+        if (!$status) {
+            return response()->json([
+                'status_code' => 404,
+                'status' => false,
+                'message' => "ID aspiration tidak ditemukan",
+                'data' => []
+            ]);
+        }
+
+        $payload = [
+            'status' => 1
+        ];
+
+        $status->update($payload);
+
+        return response()->json([
+            'status_code' => 200,
+            'status' => true,
+            'message' => "status sudah dibaca"
+        ]);
+    }
 }
