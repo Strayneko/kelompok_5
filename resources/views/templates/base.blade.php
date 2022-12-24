@@ -13,7 +13,6 @@
 
     {{-- import navbar component --}}
     <x-navbar />
-
     <div class="container">
         <main>
             @yield('content')
