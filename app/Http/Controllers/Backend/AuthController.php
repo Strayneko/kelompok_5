@@ -24,7 +24,10 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
-        return redirect()->route('auth.login');
+        return response()->json([
+            'status' => true,
+            'message' => 'success',
+        ]);
     }
 
     // TODO: register user 

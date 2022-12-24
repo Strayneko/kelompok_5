@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AspirationController;
+use App\Http\Controllers\Backend\AspirationController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Http\Request;
@@ -25,8 +25,16 @@ Route::prefix('auth')->controller(AuthController::class)->group(function(){
     Route::post('/register', 'registration');
     Route::post('/login', 'authenticate');
 });
+
+Route::prefix('user/aspiration')
+    ->name('user.aspiration.')
+    ->controller(AspirationController::class)
+    ->group(function(){
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+});
 Route::prefix('dashboard')
     ->controller(DashboardController::class)
     ->group(function () {
         Route::get('/', 'index');
-    });
+});
