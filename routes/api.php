@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Backend\AspirationController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Http\Request;
@@ -32,7 +31,9 @@ Route::prefix('dashboard')
     ->controller(DashboardController::class)
     ->group(function () {
         Route::get('/', 'index');
-});
+        Route::post('/{id}/makeAdmin', 'makeAdmin')->name('makeAdmin');
+        Route::post('/{id}/delete', 'destroy')->name('makeAdmin');
+    });
 
 // aspiration route grouping
 Route::prefix('aspiration')
@@ -44,5 +45,5 @@ Route::prefix('aspiration')
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/update', 'update')->name('update');
         Route::post('/create', 'store')->name('store');
-        Route::delete('/{id}/delete', 'destroy')->name('destroy');
+        Route::post('/{id}/delete', 'destroy')->name('destroy');
     });

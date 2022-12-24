@@ -3,10 +3,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Responses\BaseResponse;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
@@ -25,8 +26,56 @@ class DashboardController extends Controller
         ]);
     }
 
-    // TODO: make user to admin
-    public function addAdmin()
+    public function destroy($id, Request $request)
     {
+        // find user by id
+        $user = User::find($id);
+        // return error message if user not found
+        if (!$user) {
+            return response()->json([
+                'status_code' => 404,
+                'status' => false,
+                'message' => "ID User tidak ditemukan",
+                'data' => []
+            ]);
+        }
+
+        // remove url from image name
+        $imageName = Str::of($user->image)->remove($request->getSchemeAndHttpHost() . '/storage/');
+        // remove image
+        Storage::disk('public')->delete($imageName);
+        // delete user
+        $user->delete();
+        return response()->json([
+            'status_code' => 200,
+            'status' => true,
+            'message' => 'User berhasil dihapus!'
+        ]);
+    }
+
+    public function makeAdmin($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json([
+                'status_code' => 404,
+                'status' => false,
+                'message' => "ID User tidak ditemukan",
+                'data' => []
+            ]);
+        }
+
+        $payload = [
+            'role_id' => 2
+        ];
+
+        $user->update($payload);
+
+        return response()->json([
+            'status_code' => 200,
+            'status' => true,
+            'message' => "User mendapatkan hak akses Admin",
+            'data' => $user
+        ]);
     }
 }
