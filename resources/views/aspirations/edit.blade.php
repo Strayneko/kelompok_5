@@ -40,7 +40,7 @@
                 fd.append("image", image);
 
                 $.ajax({
-                    url : "http://127.0.0.1:8000/api/${id}/update",
+                    url : `http://127.0.0.1:8000/api/${id}/update`,
                     method: "POST",
                     data: fd,
                     processData:false,
