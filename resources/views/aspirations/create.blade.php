@@ -5,8 +5,9 @@
 
  @section('title', 'Registrasi User')
  @section('content')
-     <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('auth.registration') }}">
-         <h1 class="my-4">Form aspirasi</h1>
+     <h1 class="my-4">Form aspirasi</h1>
+     <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('aspiration.store') }}">
+         @csrf
 
          <div class="mb-3">
              <label for="title" class="form-label">Judul</label>
@@ -37,7 +38,7 @@
              <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
          </div>
 
-         <button type="submit" class="btn btn-primary">Submit</button>
+         <button type="submit" class="btn btn-primary mb-4">Submit</button>
      </form>
  @endsection
 
