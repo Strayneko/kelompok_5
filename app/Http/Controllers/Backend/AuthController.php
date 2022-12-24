@@ -16,13 +16,14 @@ class AuthController extends Controller
     // TODO: authenticate user
     public function authenticate(Request $request)
     {
-        $validate = $request->validate([
-            'email' => ['required'],
-            'password' => ['required'],
+        $validate = Validator::make($request->all(), [
+            'email' => 'required',
+            'password' => 'required',
         ]);
 
         if (Auth::attempt($validate)) {
             $request->session()->regenerate();
+            session()->put('logged_in', Auth::user()->id);
             return redirect()->intended('/');
         }
         return redirect()->route('auth.login');
@@ -34,12 +35,12 @@ class AuthController extends Controller
 
         $getRequest = $request->all();
         $validate = Validator::make($getRequest, [
-            "email" => ['required', 'email'],
-            "password" => ['required'],
-            "name" => ['required'],
-            'image' => ['required'],
-            'gender' => ['required'],
-            'birth_date' => ['required']
+            "email" => 'required|email',
+            "password" => 'required',
+            "name" => 'required',
+            'image' => 'required',
+            'gender' => 'required',
+            'birth_date' => 'required'
         ]);
         if ($validate->fails()) return [
             'status_code' => 400,
@@ -64,6 +65,9 @@ class AuthController extends Controller
         ], 200);
     }
 
+    public function checkSession($id)
+    {
+    }
     public function logout()
     {
         session()->forget('logged_in');

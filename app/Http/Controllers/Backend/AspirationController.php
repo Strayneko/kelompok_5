@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,30 +16,29 @@ class AspirationController extends Controller
             'title' => $request->input("title"),
             'content' => $request->input("content"),
             'image' => $request->image->store("aspirations", "public")
-        ]; 
+        ];
 
         $aspirasi = Aspiration::query()->create($payload);
-        
+
         return response()->json([
             'status_code' => 201,
             'status' => true,
             'message' => "Data Berhasil Didapatkan",
             'data' => $aspirasi
         ]);
-
     }
 
     // TODO: show all aspirations data
     public function index()
     {
         $aspirasi = Aspiration::query()->get();
-        if(!$aspirasi) {
+        if (!$aspirasi) {
             return response()->json([
-            'status_code' => 404,
-            'status' => false,
-            'message' => "Data Belum Tersedia",
-            'data' => []
-        ]);
+                'status_code' => 404,
+                'status' => false,
+                'message' => "Data Belum Tersedia",
+                'data' => []
+            ]);
         }
 
         return response()->json([
@@ -54,13 +53,13 @@ class AspirationController extends Controller
     public function update(Request $request, $id)
     {
         $aspirasi = Aspiration::find($id);
-        if(!$aspirasi) {
+        if (!$aspirasi) {
             return response()->json([
-            'status_code' => 404,
-            'status' => false,
-            'message' => "ID tidak ada",
-            'data' => []
-        ]);
+                'status_code' => 404,
+                'status' => false,
+                'message' => "ID tidak ada",
+                'data' => []
+            ]);
         }
 
         $aspirasi->title = $request->input('title');
@@ -90,13 +89,13 @@ class AspirationController extends Controller
     public function show($id)
     {
         $aspirasi = Aspiration::find($id);
-        if(!$aspirasi) {
+        if (!$aspirasi) {
             return response()->json([
-            'status_code' => 404,
-            'status' => false,
-            'message' => "ID tidak Ditemukan",
-            'data' => []
-        ]);
+                'status_code' => 404,
+                'status' => false,
+                'message' => "ID tidak Ditemukan",
+                'data' => []
+            ]);
         }
 
         return response()->json([
@@ -105,27 +104,26 @@ class AspirationController extends Controller
             'message' => "Data Berhasil Didapatkan",
             'data' => $aspirasi
         ]);
-        
     }
 
     // TODO: delete specific aspiration data by id
     public function destroy($id)
     {
         $aspirasi = Aspiration::query()->where("id", $id)->delete();
-        if(!$aspirasi) {
+        if (!$aspirasi) {
             return response()->json([
-            'status_code' => 404,
-            'status' => false,
-            'message' => "ID tidak Ditemukan",
+                'status_code' => 404,
+                'status' => false,
+                'message' => "ID tidak Ditemukan",
+                'data' => []
+            ]);
+        }
+
+        return response()->json([
+            'status_code' => 200,
+            'status' => true,
+            'message' => "Data Berhasil Dihapus",
             'data' => []
         ]);
-        }
-    
-        return response()->json([
-                   'status_code' => 200,
-                   'status' => true,
-                   'message' => "Data Berhasil Dihapus",
-                    'data' => []
-                ]);
     }
 }

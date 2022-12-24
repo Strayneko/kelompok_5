@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\AspirationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::prefix('auth')
     ->group(function () {
         Route::post('/register', 'registration');
         Route::post('/login', 'authenticate');
+        Route::post('/checkSession/{id}', 'checkSession');
     });
 Route::prefix('dashboard')
     ->controller(DashboardController::class)
