@@ -48,7 +48,7 @@
                              return;
                          }
                          alert(res.message)
-                         location.href = "http://127.0.0.1:8000/aspiration/create"
+                         location.href = "http://127.0.0.1:8000/aspiration/dashboard"
                      })
 
              })

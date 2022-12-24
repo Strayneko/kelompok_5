@@ -37,8 +37,13 @@
                      method: 'POST'
                  }).then(res => res.json())
                  .then(res => {
+                     if (!res.status) {
+                         alert(res.message)
+                         return;
+                     }
                      // get response messagee
                      alert(res.message)
+                     location.href = "http://127.0.0.1:8000/aspiration"
                  })
          }
          document.addEventListener('DOMContentLoaded', () => {

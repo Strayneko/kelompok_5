@@ -14,22 +14,23 @@ class AuthController extends Controller
     // TODO: show login form
 
     // TODO: authenticate user
-    public function authenticate(Request $request){
+    public function authenticate(Request $request)
+    {
         $validate = Validator::make($request->all(), [
             'email' => 'required',
             'password' => 'required',
         ]);
 
-        if(Auth::attempt($validate->validated())){
+        if (Auth::attempt($validate->validated())) {
             $request->session()->regenerate();
             session()->put('logged_in', Auth::user()->id);
-            if(Auth::user()->role_id == 1){
+            if (Auth::user()->role_id == 1) {
                 return redirect()->intended('/aspiration/create');
-            } else{
+            } else {
                 return redirect()->intended('/aspiration');
             }
         }
-        return redirect()->back()->withErrors(['message' => 'Login errors']);
+        return redirect()->back()->withErrors(['message' => 'Login errors, Username/ password salah']);
     }
 
     // TODO: register user 
@@ -70,7 +71,8 @@ class AuthController extends Controller
     public function checkSession($id)
     {
     }
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         session()->forget('logged_in');
         return redirect()->route('auth.login');
