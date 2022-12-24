@@ -33,6 +33,7 @@ Route::prefix('dashboard')
     ->group(function () {
         Route::get('/', 'index');
         Route::post('/{id}/makeAdmin', 'makeAdmin')->name('makeAdmin');
+        Route::post('/{id}/changeStatus', 'changeStatus')->name('changeStatus');
         Route::post('/{id}/delete', 'destroy')->name('makeAdmin');
     });
 
