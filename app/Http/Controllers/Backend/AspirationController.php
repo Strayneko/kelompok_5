@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Aspiration;
 use App\Models\Role;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use App\Models\User;
 
 class AspirationController extends Controller
@@ -54,7 +56,8 @@ class AspirationController extends Controller
     }
 
     // TODO: update aspiration data by the given id
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $aspirasi = Aspiration::find($id);
         if (!$aspirasi) {
             return response()->json([
@@ -110,9 +113,9 @@ class AspirationController extends Controller
     }
 
     // TODO: delete specific aspiration data by id
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        $aspirasi = Aspiration::query()->where("id", $id)->delete();
+        $aspirasi = Aspiration::find($id);
         if (!$aspirasi) {
             return response()->json([
                 'status_code' => 404,
@@ -121,6 +124,9 @@ class AspirationController extends Controller
                 'data' => []
             ]);
         }
+        $imageName = Str::of($aspirasi->image)->remove($request->getSchemeAndHttpHost() . '/storage/');
+        Storage::disk('public')->delete($imageName);
+        $aspirasi->delete();
 
         return response()->json([
             'status_code' => 200,
@@ -133,7 +139,7 @@ class AspirationController extends Controller
     public function makeAdmin($id)
     {
         $user = User::find($id);
-        if(!$user) {
+        if (!$user) {
             return response()->json([
                 'status_code' => 404,
                 'status' => false,
@@ -145,14 +151,14 @@ class AspirationController extends Controller
         $payload = [
             'role_id' => 2
         ];
-        
+
         $user->update($payload);
 
-       return response()->json([
+        return response()->json([
             'status_code' => 200,
             'status' => true,
             'message' => "User mendapatkan hak akses Admin",
             'data' => $user
-       ]);
+        ]);
     }
 }
