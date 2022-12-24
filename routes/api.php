@@ -32,6 +32,7 @@ Route::prefix('dashboard')
     ->controller(DashboardController::class)
     ->group(function () {
         Route::get('/', 'index');
+        Route::post('/{id}/makeAdmin', 'makeAdmin')->name('makeAdmin');
 });
 
 // aspiration route grouping
@@ -45,5 +46,4 @@ Route::prefix('aspiration')
         Route::post('/{id}/update', 'update')->name('update');
         Route::post('/create', 'store')->name('store');
         Route::delete('/{id}/delete', 'destroy')->name('destroy');
-        Route::post('/{id}/makeAdmin', 'makeAdmin')->name('makeAdmin');
     });
