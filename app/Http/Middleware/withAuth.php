@@ -16,7 +16,7 @@ class withAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->get('logged_in')) return redirect()->route('home');
+        if(session()->get('logged_in')) return redirect()->route('aspiration.index');
         return $next($request);
     }
 }
