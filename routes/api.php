@@ -35,17 +35,17 @@ Route::prefix('dashboard')
         Route::post('/{id}/makeAdmin', 'makeAdmin')->name('makeAdmin');
         Route::post('/{id}/delete', 'destroy')->name('makeAdmin');
     });
-    
-    // aspiration route grouping
-    Route::prefix('aspiration')
+
+// aspiration route grouping
+Route::prefix('aspiration')
     ->controller(AspirationController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/dashboard/{id}', 'getAspiById')->name('aspi.id');
         Route::get('/create', 'create')->name('create');
         Route::get('/{id}', 'show')->name('show');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/update', 'update')->name('update');
+        Route::post('/dashboard', 'getAspiById')->name('aspi.id');
         Route::post('/{id}/changeStatus', 'changeStatus')->name('changeStatus');
         Route::post('/create', 'store')->name('store');
         Route::post('/{id}/delete', 'destroy')->name('destroy');
