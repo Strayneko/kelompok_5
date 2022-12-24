@@ -26,6 +26,7 @@
                 }).then(res => res.json())
                 .then(res => {
                     alert(res.message)
+                    location.href = ""
                 }).catch(err => alert(err))
         }
 

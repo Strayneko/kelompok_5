@@ -1,8 +1,9 @@
-@inject('auth', 'Illuminate\Support\Facades\Auth')
 @extends('templates.base')
 @section('title', 'Daftar Aspirasi')
 
 @section('content')
+    <h1 class="my-4">Daftar aspirasi</h1>
+    <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
