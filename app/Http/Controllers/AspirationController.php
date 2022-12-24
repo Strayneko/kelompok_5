@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AspirationController extends Controller
-{
+class AspirationController extends Controller{
     //TODO: show add aspiration form
     public function create(Request $request)
     {
