@@ -17,6 +17,20 @@
     </table>
 
     <script>
+        // delete aspiration function
+        function deleteAspiration(id) {
+            const konfirm = confirm('apakah anda yakin?')
+            if (!konfirm) return;
+            fetch(`http://127.0.0.1:8000/api/aspiration/${id}/delete`, {
+                    method: 'POST'
+                }).then(res => res.json())
+                .then(res => {
+                    alert(res.message)
+                }).catch(err => alert(err))
+        }
+
+        // when DOM is fully loaded
+        // do the logic
         document.addEventListener('DOMContentLoaded', () => {
             fetch('http://127.0.0.1:8000/api/aspiration').then(res => res.json())
                 .then(res => {
@@ -30,13 +44,13 @@
                     <td>
                         <a href="http://127.0.0.1:8000/aspiration/${aspiration.id}"
                             class="badge text-decoration-none text-bg-info">Detail</a>
-                        <a href="" class="badge text-decoration-none text-bg-danger text-white">Hapus</a>
+                        <a href="#" onclick="deleteAspiration(${aspiration.id})" class="badge text-decoration-none text-bg-danger text-white">Hapus</a>
                     </td>
                 </tr>`
                     }
 
                     $('#aspirations').html(html)
-                });
+                }).catch(err => alert);
 
         })
     </script>

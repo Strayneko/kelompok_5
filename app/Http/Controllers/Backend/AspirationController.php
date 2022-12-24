@@ -8,13 +8,14 @@ use App\Models\Aspiration;
 use App\Models\Role;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AspirationController extends Controller
 {
     //TODO: show store aspiration
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $payload = [
             'user_id' => $request->input('user_id'),
             'title' => $request->input("title"),
@@ -46,8 +47,9 @@ class AspirationController extends Controller
     }
 
     // TODO: show all aspirations data by userId
-    public function getAspiById($id){
-        $getData = Aspiration::where('user_id', $id)->get();
+    public function getAspiById()
+    {
+        $getData = Aspiration::where('user_id', Auth::user()->id)->get();
         return response()->json([
             'status' => true,
             'code' => 200,
@@ -110,8 +112,8 @@ class AspirationController extends Controller
             'status' => false,
             'message' => $validate->messages()->all()
         ];
-    
-        
+
+
 
         $aspirasi->update();
 
