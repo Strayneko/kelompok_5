@@ -16,10 +16,6 @@ return new class extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name', 20);
-            $table->string('title', 255);
-            $table->text('content_response');
-            $table->text('image');
-            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
