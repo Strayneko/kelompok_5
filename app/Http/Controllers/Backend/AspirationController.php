@@ -135,14 +135,6 @@ class AspirationController extends Controller
             ]);
         }
 
-
-        $validate = Validator::make($aspirasi);
-        if ($validate->fails()) return [
-            'status_code' => 400,
-            'status' => false,
-            'message' => $validate->messages()->all()
-        ];
-
         return response()->json([
             'status_code' => 200,
             'status' => true,
@@ -166,13 +158,6 @@ class AspirationController extends Controller
         $imageName = Str::of($aspirasi->image)->remove($request->getSchemeAndHttpHost() . '/storage/');
         Storage::disk('public')->delete($imageName);
 
-
-        $validate = Validator::make($aspirasi);
-        if ($validate->fails()) return [
-            'status_code' => 400,
-            'status' => false,
-            'message' => $validate->messages()->all()
-        ];
         $aspirasi->delete();
 
         return response()->json([
@@ -194,14 +179,6 @@ class AspirationController extends Controller
                 'data' => []
             ]);
         }
-
-
-        $validate = Validator::make($status);
-        if ($validate->fails()) return [
-            'status_code' => 400,
-            'status' => false,
-            'message' => $validate->messages()->all()
-        ];
 
         $payload = [
             'status' => 1
