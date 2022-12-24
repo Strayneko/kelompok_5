@@ -26,10 +26,10 @@ Route::name('aspiration.')
     ->prefix('aspiration')
     ->middleware(['auth', 'checkrole:2'])
     ->controller(AspirationController::class)
-    ->group(function () {
+    ->group(function(){
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create')->withoutMiddleware(['checkrole:2'])->middleware(['checkrole:1']);
-        Route::get('/dashboard/', 'getAspiByid')->name('getAspiByid')->withoutMiddleware(['checkrole:2'])->middleware(['checkrole:1']);
+        Route::get('/dashboard/{id}', 'getAspiByid')->name('getAspiByid')->withoutMiddleware(['checkrole:2'])->middleware(['checkrole:1']);
         Route::get('/{id}', 'show')->name('show');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/update', 'update')->name('update');
@@ -40,7 +40,7 @@ Route::name('aspiration.')
 // auth route grouping
 Route::name('auth.')
     ->prefix('auth')
-    ->group(function () {
+    ->group(function(){
         Route::get('/', [AuthViewController::class, 'login'])->name('login')->middleware('withAuth');
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('noAuth');
         Route::get('/register', [AuthViewController::class, 'register'])->name('register')->middleware('withAuth');

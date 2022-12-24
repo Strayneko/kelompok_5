@@ -22,6 +22,10 @@
                             <a class="nav-link active" aria-current="page"
                                 href="{{ route('aspiration.create') }}">tambah aspirasi</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{{ route('aspiration.create') }}">Daftar aspirasi</a>
+                        </li>
                     @endif
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('auth.logout') }}">Logout</a>

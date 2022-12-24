@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Aspiration;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +56,15 @@ class AspirationController extends Controller
             'code' => 200,
             'data' => $getData
         ], 200);
+    }
+
+    public function getUserById($id){
+        $getData = User::where('id', $id)->get();
+        return response()->json([
+            'status' => true,
+            'code' => 200,
+            'data' => $getData
+        ]);
     }
 
     // TODO: show all aspirations data
