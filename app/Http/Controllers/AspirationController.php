@@ -15,11 +15,12 @@ class AspirationController extends Controller
         $payload = [
             'title' => $request->input("title"),
             'content' => $request->input("content"),
-            'file' => $request->file->store("aspirations", "public")
-        ];
+            'image' => $request->image->store("aspirations", "public")
+        ]; 
 
         $aspirasi = Aspiration::query()->create($payload);
         return view('aspirations.create', compact('aspirasi'));
+
     }
 
     // TODO: show all aspirations data
