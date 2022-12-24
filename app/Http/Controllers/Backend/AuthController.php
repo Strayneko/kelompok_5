@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -33,8 +34,9 @@ class AuthController extends Controller
     // TODO: register user 
     public function registration(Request $request)
     {
+
         $getRequest = $request->all();
-        $request->validate([
+        $validate = Validator::make($getRequest, [
             "email" => ['required', 'email'],
             "password" => ['required'],
             "name" => ['required'],
@@ -42,7 +44,11 @@ class AuthController extends Controller
             'gender' => ['required'],
             'birth_date' => ['required']
         ]);
-
+        if ($validate->fails()) return [
+            'status_code' => 400,
+            'status' => false,
+            'message' => $validate->messages()->all()
+        ];
         $getRequest['role_id'] = 1;
         if ($request->file('image')) {
             $imgFile = $request->file('image');
@@ -56,6 +62,7 @@ class AuthController extends Controller
         return response()->json([
             'status_code' => 200,
             'status' => true,
+            'message' => 'Success! Kamu telah terdaftar sebagai user!',
             'data' => $user,
         ], 200);
     }

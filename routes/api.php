@@ -1,6 +1,9 @@
 <?php
 
+<<<<<<< HEAD
 use App\Http\Controllers\Backend\AspirationController;
+=======
+>>>>>>> b9735374265be6daa02ec2638bac19a4b689e2ce
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Http\Request;
@@ -20,19 +23,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::prefix('auth')->controller(AuthController::class)->group(function(){
-    Route::post('/register', 'registration');
-    Route::post('/login', 'authenticate');
-});
-
-Route::prefix('user/aspiration')
-    ->name('user.aspiration.')
-    ->controller(AspirationController::class)
-    ->group(function(){
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-});
+Route::post('/register/a', [AuthController::class, 'registration']);
+Route::prefix('auth')
+    ->controller(AuthController::class)
+    ->group(function () {
+        Route::post('/register', 'registration');
+        Route::post('/login', 'authenticate');
+    });
 Route::prefix('dashboard')
     ->controller(DashboardController::class)
     ->group(function () {
