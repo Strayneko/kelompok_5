@@ -66,11 +66,9 @@ class AuthController extends Controller
     public function checkSession($id)
     {
     }
-    public function logout()
-    {
+    public function logout(){
+        Auth::logout();
         session()->forget('logged_in');
-        return response()->json([
-            'message' => 'logged out'
-        ], 200);
+        return redirect()->route('auth.login');
     }
 }

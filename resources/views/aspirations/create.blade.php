@@ -23,6 +23,5 @@
 
          <button type="submit" class="btn btn-primary mb-4">Submit</button>
      </form>
- @endsection
 
 @endsection
