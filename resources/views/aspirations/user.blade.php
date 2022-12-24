@@ -1,7 +1,9 @@
+@inject('auth', 'Illuminate\Support\Facades\Auth')
 @extends('templates.base')
 @section('title', 'Daftar Aspirasi')
 
 @section('content')
+    <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
     <h1 class="my-4">Daftar Apirasiku</h1>
     <table class="table table-bordered table-striped table-hover">
         <thead>
@@ -20,11 +22,11 @@
         document.addEventListener('DOMContentLoaded', () => {
             let id = location.href.split('/')
             id = id[id.length - 1]
+            const fd = new FormData()
+            fd.append('id', $('#user_id').val())
             fetch(`http://127.0.0.1:8000/api/aspiration/dashboard`, {
                 method: "POST",
-                body: {
-                    id
-                }
+                body: fd
             }).then(res => res.json()).then(res => {
                 if (!res.status) $('#aspirations').html(`
                     <tr>
