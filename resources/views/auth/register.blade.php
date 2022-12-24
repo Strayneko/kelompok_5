@@ -2,7 +2,7 @@
 
 @section('title', 'login')
 @section('content')
-    <form method="post" enctype="multipart/form-data" action="{{ route('auth.register') }}">
+    <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('auth.register') }}">
         <h1 class="my-4">Registrasi User</h1>
 
         <div class="mb-3">

@@ -1,27 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller{
+class AuthController extends Controller
+{
 
     // TODO: show login form
-    public function login(){
-       return view('auth.login');
+    public function login()
+    {
+        return view('auth.login');
     }
 
     // TODO: authenticate user
-    public function authenticate(Request $request){
+    public function authenticate(Request $request)
+    {
         $validate = $request->validate([
             'email' => ['required'],
             'password' => ['required'],
         ]);
-        
-        if(Auth::attempt($validate)){
+
+        if (Auth::attempt($validate)) {
             $request->session()->regenerate();
             return response()->json([]);
         }
@@ -29,15 +32,17 @@ class AuthController extends Controller{
     }
 
     // TODO: show registration form
-    public function register(){
+    public function register()
+    {
         return view('auth.register');
     }
 
     // TODO: register user 
-    public function registration(Request $request){
+    public function registration(Request $request)
+    {
         $getRequest = $request->all();
         $request->validate([
-            "email" => ['required' ,'email'],
+            "email" => ['required', 'email'],
             "password" => ['required'],
             "name" => ['required'],
             'image' => ['required'],
@@ -45,10 +50,10 @@ class AuthController extends Controller{
             'birth_date' => ['required']
         ]);
 
-        if($request->file('image')){
+        if ($request->file('image')) {
             $imgFile = $request->file('image');
             $getRequest['image'] =  $imgFile->store('image/', 'public');
-        } else{
+        } else {
             $getRequest['image'] = 'default.jpg';
         }
 

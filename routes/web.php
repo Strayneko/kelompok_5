@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +34,7 @@ Route::name('aspiration.')
 // auth route grouping
 Route::name('auth.')
     ->prefix('auth')
-    ->controller(AspirationController::class)
+    ->controller(AuthController::class)
     ->group(function () {
         Route::get('/', 'login')->name('login');
         Route::get('/register', 'register')->name('register');
