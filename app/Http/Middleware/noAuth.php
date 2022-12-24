@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class withAuth
+class noAuth
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,6 @@ class withAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->get('logged_in')) return redirect()->route('home');
         return $next($request);
     }
 }
