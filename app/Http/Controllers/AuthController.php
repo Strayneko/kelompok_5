@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AuthController extends Controller
-{
-    //
+class AuthController extends Controller{
 
     // TODO: show login form
-    public function login()
-    {
+    public function login(Request $request){
+        $request->validate([
+            'email' => ['required'],
+            'password' => ['']
+        ]);
+
+        
     }
 
     // TODO: authenticate user
