@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return response()->json(['message' => 'server running in port 8000']);
+    return redirect()->route('aspiration.create');
 });
 
 // aspiration route grouping
