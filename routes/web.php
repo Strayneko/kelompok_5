@@ -41,7 +41,7 @@ Route::name('auth.')
     ->prefix('auth')
     ->group(function(){
         Route::get('/', [AuthViewController::class, 'login'])->name('login')->middleware('withAuth');
-        Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('withAuth');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('noAuth');
         Route::get('/register', [AuthViewController::class, 'register'])->name('register');
         Route::post('/', [AuthController::class, 'authenticate'])->name('authenticate');
         // Route::post('/register', 'registration')->name('registration');
