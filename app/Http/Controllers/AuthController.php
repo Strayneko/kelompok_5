@@ -26,7 +26,7 @@ class AuthController extends Controller{
             $request->session()->regenerate();
             return redirect()->route('home')->withErrors(['message' => 'login gagal']);
         }
-        return redirect()->route('auth.login')->withErrors(['message' => 'login gagal']);
+        return redirect()->route('home');
     }
 
     // TODO: show registration form

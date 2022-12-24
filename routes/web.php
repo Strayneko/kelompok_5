@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('aspiration.create');
-});
+})->name('home');
 
 // aspiration route grouping
 Route::name('aspiration.')
@@ -38,6 +38,7 @@ Route::name('auth.')
     ->controller(AuthController::class)
     ->group(function () {
         Route::get('/', 'login')->name('login');
+        Route::get('/logout', 'logout')->name('logout');
         Route::get('/register', 'register')->name('register');
         Route::post('/', 'authenticate')->name('authenticate');
         Route::post('/register', 'registration')->name('registration');

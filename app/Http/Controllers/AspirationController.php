@@ -31,6 +31,10 @@ class AspirationController extends Controller
         return view('aspirations.index', compact('aspirasi'));
     }
 
+    public function create(){
+        return view('aspirations.create');
+    }
+
     // TODO: show update form
     public function edit(Request $request, $id)
     {
