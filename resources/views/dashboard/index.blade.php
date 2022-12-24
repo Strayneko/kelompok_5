@@ -18,28 +18,75 @@
     </table>
 
     <script>
+        function deleteUser(id) {
+            const konfirm = confirm('Apakah anda ingin menjadikan user ini sebagai admin?')
+            if (!konfirm) return
+            fetch(`http://127.0.0.1:8000/api/dashboard/${id}/delete`, {
+                    method: 'POST'
+                })
+                .then(res => res.json())
+                .then(res => {
+                        // get id from url path
+                        let id = location.href.split('/')
+                        id = id[id.length - 1]
+                        if (!res.status) {
+                            alert(res.message)
+                            return;
+                        }
+                        alert(res.message);
+                        location.href = "http://127.0.0.1:8000/dashboard"
+                    }
+
+                );
+        }
+
+        function makeAdmin(id) {
+            const konfirm = confirm('Apakah anda yakin?')
+            if (!konfirm) return
+            fetch(`http://127.0.0.1:8000/api/dashboard/${id}/makeAdmin`, {
+                    method: 'POST'
+                })
+                .then(res => res.json())
+                .then(res => {
+                        // get id from url path
+                        let id = location.href.split('/')
+                        id = id[id.length - 1]
+                        if (!res.status) {
+                            alert(res.message)
+                            return;
+                        }
+                        alert(res.message);
+                        location.href = "http://127.0.0.1:8000/dashboard"
+                    }
+
+                );
+        }
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('http://127.0.0.1:8000/api/dashboard').then(res => res.json()).then(res => {
-                let html = ``
-                let i = 1;
-                for (let user of res.data) {
-                    html += `  <tr>
+
+
+
+            fetch('http://127.0.0.1:8000/api/dashboard')
+                .then(res => res.json())
+                .then(res => {
+                    let html = ``
+                    let i = 1;
+                    for (let user of res.data) {
+                        html += `<tr>
                     <td>${i++}</td>
                     <td>${user.email}</td>
                     <td>${user.name}</td>
-                    <td>${user.role == 1 ? 'User' : 'Admin' }</td>
+                    <td>${user.role_id == 1 ? 'User' : 'Admin' }</td>
                     <td>
-                        <a href=""
+                        <a href="#"
+                        onclick="makeAdmin(${user.id})"
                             class="badge text-decoration-none text-bg-info">Jadikan Admin</a>
-                        <a href="" class="badge text-decoration-none text-bg-success text-white">Update</a>
-                        <a href="" class="badge text-decoration-none text-bg-danger text-white">Hapus</a>
+                        <a href="#" onclick="deleteUser(${user.id})" class="badge text-decoration-none text-bg-danger text-white">Hapus</a>
                     </td>
                 </tr>`
-                }
+                    }
 
-                $('#user_list').html(html)
-            });
-
-        })
+                    $('#user_list').html(html)
+                });
+        });
     </script>
 @endsection
