@@ -45,11 +45,3 @@ Route::name('auth.')
         Route::post('/', 'authenticate')->name('authenticate');
         Route::post('/register', 'registration')->name('registration');
     });
-
-// auth route grouping
-Route::name('dashboard.')
-    ->prefix('dashboard')
-    ->controller(DashboardController::class)
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
