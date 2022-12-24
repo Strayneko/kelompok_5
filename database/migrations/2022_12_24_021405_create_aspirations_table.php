@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('title', 255);
-            $table->text('content_response');
+            $table->text('content');
             $table->text('image');
             $table->tinyInteger('status');
             $table->timestamps();
