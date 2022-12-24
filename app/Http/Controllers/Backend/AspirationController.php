@@ -130,29 +130,5 @@ class AspirationController extends Controller
         ]);
     }
 
-    public function makeAdmin($id)
-    {
-        $user = User::find($id);
-        if(!$user) {
-            return response()->json([
-                'status_code' => 404,
-                'status' => false,
-                'message' => "ID User tidak ditemukan",
-                'data' => []
-            ]);
-        }
 
-        $payload = [
-            'role_id' => 2
-        ];
-        
-        $user->update($payload);
-
-       return response()->json([
-            'status_code' => 200,
-            'status' => true,
-            'message' => "User mendapatkan hak akses Admin",
-            'data' => $user
-       ]);
-    }
 }
