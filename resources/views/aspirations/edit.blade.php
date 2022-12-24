@@ -21,8 +21,38 @@
              <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
          </div>
 
-         <button type="submit" class="btn btn-primary mb-4">Submit</button>
+         <button type="submit" onclick="update()" class="btn btn-primary mb-4">Submit</button>
      </form>
- @endsection
 
-@endsection
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+             let id = location.href.split('/')
+             id = id[id.length - 1]
+
+            function update(){
+                let title = $("#title").val()
+                let content = $("#content").val()
+                let image = $("#image").prop('files')[0]
+
+                let fd = new FormData();
+                fd.append("title", title);
+                fd.append("content", content);
+                fd.append("image", image);
+
+                $.ajax({
+                    url : `http://127.0.0.1:8000/api/${id}/update`,
+                    method: "POST",
+                    data: fd,
+                    processData:false,
+                    contentType:false,
+                    success: _ =>{
+                    window.location.href = "http://127.0.0.1:8000/dashboard"
+                    }
+                })
+            }
+        
+        })
+    </script>
+
+
+ @endsection
