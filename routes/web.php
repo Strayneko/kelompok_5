@@ -29,7 +29,7 @@ Route::name('aspiration.')
     ->group(function(){
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create')->withoutMiddleware(['checkrole:2'])->middleware(['checkrole:1']);
-        Route::get('/dashboard/{id}', 'getAspiByid')->name('getAspiByid')->withoutMiddleware(['checkrole:2'])->middleware(['checkrole:1']);
+        Route::get('/dashboard', 'getAspiByid')->name('getAspiByid')->withoutMiddleware(['checkrole:2'])->middleware(['checkrole:1']);
         Route::get('/{id}', 'show')->name('show');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/update', 'update')->name('update');
