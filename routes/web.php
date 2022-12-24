@@ -45,3 +45,12 @@ Route::name('auth.')
         // Route::post('/', 'authenticate')->name('authenticate');
         // Route::post('/register', 'registration')->name('registration');
     });
+
+
+// dashboard
+Route::prefix('dashboard')
+    ->name('dashboard.')
+    ->controller(DashboardController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
