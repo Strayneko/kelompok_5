@@ -1,10 +1,6 @@
  @extends('templates.base')
  @section('title', 'Tambah Aspirasi')
  @section('content')
-     @extends('templates.base')
-
- @section('title', 'Registrasi User')
- @section('content')
      <h1 class="my-4">Form aspirasi</h1>
      <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('aspiration.store') }}">
          @csrf

@@ -15,9 +15,9 @@
         <tbody>
             @foreach ($aspirasi as $aspiration)
                 <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td>Contoh Judul</td>
-                    <td>Belum Dibaca</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $aspiration->title }}</td>
+                    <td>{{ $aspiration->status }}</td>
                     <td>
                         <a href="{{ route('aspiration.show', ['id' => 1]) }}"
                             class="badge text-decoration-none text-bg-info">Detail</a>
