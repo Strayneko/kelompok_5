@@ -52,6 +52,9 @@
                          alert(res.message)
                          return;
                      }
+                     //  check if current aspiration is readed by admin
+                     // then hide the button
+                     if (res.data.status == 1) $("#changeStatus").hide()
                      //  set form value if request status true
                      $('#sender_name').val(res.data.user_id)
                      $('#title').val(res.data.title)

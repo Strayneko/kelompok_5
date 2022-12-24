@@ -65,6 +65,12 @@ class DashboardController extends Controller
                 'data' => []
             ]);
         }
+        // return error response message
+        if ($user->role_id == 2) return response()->json([
+            'status_code' => 400,
+            'status' => false,
+            'message' => "User sudah menjadi admin",
+        ]);
 
         $payload = [
             'role_id' => 2
@@ -79,6 +85,4 @@ class DashboardController extends Controller
             'data' => $user
         ]);
     }
-
-
 }
