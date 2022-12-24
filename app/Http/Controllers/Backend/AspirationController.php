@@ -59,14 +59,6 @@ class AspirationController extends Controller
             ]);
         }
 
-
-        $validate = Validator::make($aspirasi);
-        if ($validate->fails()) return [
-            'status_code' => 400,
-            'status' => false,
-            'message' => $validate->messages()->all()
-        ];
-
         return response()->json([
             'status_code' => 200,
             'status' => true,
