@@ -15,7 +15,7 @@
         <tbody id="aspirations">
         </tbody>
     </table>
-    <a href="{{ route('aspiration.create') }}">Tambah Aspirasi</a>
+    <a href="{{ route('aspiration.create') }}" class="btn btn-primary">Tambah Aspirasi</a>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -38,7 +38,7 @@
                     html += `<tr>
                 <td>${i++}</td>
                 <td>${aspiration.title}</td>
-                <td>${aspiration.status == 0 ? 'Belum dibaca' : 'Sudah dibaca'}</td>
+                <td>${aspiration.status == 0 ? '<span class="text-danger">Belum dibaca</span>' : '<span class="text-success">Sudah dibaca</span>'}</td>
             </tr>`
                 }
 
