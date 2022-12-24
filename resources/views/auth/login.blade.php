@@ -20,5 +20,7 @@
             <input type="password" class="form-control" name="password" id="password" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('auth.register') }}" class="btn btn-success">Register</a>
+
     </form>
 @endsection
