@@ -1,6 +1,6 @@
 @extends('templates.base')
 
-@section('title', 'login')
+@section('title', 'Registrasi User')
 @section('content')
     <form method="post" class="col-md-4" enctype="multipart/form-data" action="{{ route('auth.register') }}">
       @csrf
