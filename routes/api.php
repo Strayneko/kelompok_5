@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Backend\AspirationController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\AspirationController;
@@ -46,4 +45,5 @@ Route::prefix('aspiration')
         Route::post('/{id}/update', 'update')->name('update');
         Route::post('/create', 'store')->name('store');
         Route::delete('/{id}/delete', 'destroy')->name('destroy');
+        Route::post('/{id}/makeAdmin', 'makeAdmin')->name('makeAdmin');
     });
