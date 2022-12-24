@@ -30,7 +30,7 @@
                     <td>${user.role == 1 ? 'User' : 'Admin' }</td>
                     <td>
                         <a href=""
-                            class="badge text-decoration-none text-bg-info">Detail</a>
+                            class="badge text-decoration-none text-bg-info">Jadikan Admin</a>
                         <a href="" class="badge text-decoration-none text-bg-success text-white">Update</a>
                         <a href="" class="badge text-decoration-none text-bg-danger text-white">Hapus</a>
                     </td>

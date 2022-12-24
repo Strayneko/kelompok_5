@@ -16,7 +16,7 @@ class AspirationController extends Controller
             'user_id' => $request->input('user_id'),
             'title' => $request->input("title"),
             'content' => $request->input("content"),
-            'image' => $request->image->store("aspirations", "public"),
+            'image' => $request->getSchemeAndHttpHost() . '/storage/' .  $request->image->store("aspirations", "public"),
             'status' => 0
         ];
 
