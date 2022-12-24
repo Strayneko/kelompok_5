@@ -47,9 +47,15 @@ class AspirationController extends Controller
     }
 
     // TODO: show all aspirations data by userId
-    public function getAspiById()
+    public function getAspiById(Request $request)
     {
-        $getData = Aspiration::where('user_id', Auth::user()->id)->get();
+        $id = $request->input('id');
+        $getData = Aspiration::where('user_id', $id)->get();
+        if (empty($getData->all())) return response()->json([
+            'status_code' => 404,
+            'status' => false,
+            'message' => 'Data aspirasi tidak ditemukan'
+        ]);
         return response()->json([
             'status' => true,
             'code' => 200,
