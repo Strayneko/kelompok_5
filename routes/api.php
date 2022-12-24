@@ -31,3 +31,16 @@ Route::prefix('dashboard')
     ->group(function () {
         Route::get('/', 'index');
     });
+
+// aspiration route grouping
+Route::prefix('aspiration')
+    ->controller(AspirationController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::post('/{id}/update', 'update')->name('update');
+        Route::post('/create', 'store')->name('store');
+        Route::delete('/{id}/delete', 'destroy')->name('destroy');
+    });
