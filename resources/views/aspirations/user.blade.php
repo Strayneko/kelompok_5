@@ -3,20 +3,18 @@
 @section('title', 'Daftar Aspirasi')
 
 @section('content')
-    <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
-    <h1 class="my-4">Daftar Apirasiku</h1>
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Judul</th>
                 <th scope="col">Status</th>
-                <th scope="col">Opsi</th>
             </tr>
         </thead>
         <tbody id="aspirations">
         </tbody>
     </table>
+    <a href="{{ route('aspiration.create') }}">Tambah Aspirasi</a>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -40,12 +38,6 @@
                 <td>${i++}</td>
                 <td>${aspiration.title}</td>
                 <td>${aspiration.status == 0 ? 'Belum dibaca' : 'Sudah dibaca'}</td>
-                <td>
-                    <a href="http://127.0.0.1:8000/aspiration/${aspiration.id}"
-                        class="badge text-decoration-none text-bg-info">Detail</a>
-                    <a href="" class="badge text-decoration-none text-bg-success text-white">Update</a>
-                    <a href="" class="badge text-decoration-none text-bg-danger text-white">Hapus</a>
-                </td>
             </tr>`
                 }
 
