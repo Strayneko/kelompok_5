@@ -18,16 +18,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('aspirations.index');
+    return redirect()->route('aspiration.create');
 })->name('home');
 
 // aspiration route grouping
 Route::name('aspiration.')
     ->prefix('aspiration')
+    ->middleware(['auth', 'checkrole:2'])
     ->controller(AspirationController::class)
-    ->group(function () {
+    ->group(function(){
         Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
+        Route::get('/create', 'create')->name('create')->withoutMiddleware(['checkrole:2'])->middleware(['checkrole:1']);
         Route::get('/{id}', 'show')->name('show');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/update', 'update')->name('update');
@@ -40,7 +41,7 @@ Route::name('auth.')
     ->prefix('auth')
     ->group(function(){
         Route::get('/', [AuthViewController::class, 'login'])->name('login');
-        // Route::get('/logout', 'logout')->name('logout');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/register', [AuthViewController::class, 'register'])->name('register');
         Route::post('/', [AuthController::class, 'authenticate'])->name('authenticate');
         // Route::post('/register', 'registration')->name('registration');
@@ -49,6 +50,7 @@ Route::name('auth.')
 // dashboard
 Route::prefix('dashboard')
     ->name('dashboard.')
+    ->middleware(['auth', 'checkrole:2'])
     ->controller(DashboardController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');

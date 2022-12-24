@@ -6,12 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Aspiration;
 
-class AspirationController extends Controller
-{
+class AspirationController extends Controller{
     //TODO: show store aspiration
-    public function store(Request $request)
-    {
-
+    public function store(Request $request){
         $payload = [
             'user_id' => $request->input('user_id'),
             'title' => $request->input("title"),

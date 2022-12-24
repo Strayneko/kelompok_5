@@ -12,8 +12,18 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('dashboard.index') }}">Dashboard</a>
-        </div>
-        </li>
+                </li>
+                @if(Auth::check())
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('auth.logout') }}">logout</a>
+                </li>
+                @else
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('auth.login') }}">Login</a>
+                </li>
+
+                @endif
+            </div>
 
     </div>
 </nav>

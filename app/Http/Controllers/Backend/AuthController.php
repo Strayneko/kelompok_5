@@ -14,17 +14,16 @@ class AuthController extends Controller
     // TODO: show login form
 
     // TODO: authenticate user
-    public function authenticate(Request $request)
-    {
+    public function authenticate(Request $request){
         $validate = Validator::make($request->all(), [
             'email' => 'required',
             'password' => 'required',
         ]);
 
-        if(Auth::attempt($validate)){
+        if(Auth::attempt($validate->validated())){
             $request->session()->regenerate();
             session()->put('logged_in', Auth::user()->id);
-            return redirect()->intended('/');
+            return redirect()->intended('/aspiration/create');
         }
         return redirect()->back()->withErrors(['message' => 'Login errors']);
     }
